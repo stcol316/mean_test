@@ -1,0 +1,58 @@
+<div tabContent class="table-container">
+
+    <span style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+        <button mat-button (click)="onNewClick()">
+            <mat-icon matTooltip="Add new booking">more_time</mat-icon>
+        </button>
+
+        <mat-paginator [length]="100"
+            [pageSize]="1"
+            [pageSizeOptions]="[1, 5, 10, 25, 100]">
+        </mat-paginator>
+    </span>
+
+    <table mat-table #table [dataSource]="dataSource" matSort >
+
+    <ng-container matColumnDef="firstName">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef class="mat-column-header-two">Name</th>
+        <td mat-cell *matCellDef="let element" id="first_name_field" class="mat-column-cell-two">{{element.firstName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef class="mat-column-header-two">Surname</th>
+        <td mat-cell *matCellDef="let element" id="last_name_field" class="mat-column-cell-two">{{element.lastName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="bookingDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-header-two">Date</th>
+        <td mat-cell *matCellDef="let element" id="booking_date_field" class="mat-column-cell-two">{{element.bookingDate}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="bookingTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-header-two">Time</th>
+        <td mat-cell *matCellDef="let element" id="booking_time_field" class="mat-column-cell-two">{{element.bookingTime}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-header-two">Number</th>
+        <td mat-cell *matCellDef="let element" id="phone_number_field" class="mat-column-cell-two">{{element.phoneNumber}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="partySize">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-header-two">Size</th>
+        <td mat-cell *matCellDef="let element" id="party_size_field" class="mat-column-cell-two">{{element.partySize}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="editBooking">
+        <th mat-header-cell *matHeaderCellDef class="mat-column-header-one">Actions</th>
+        <td mat-cell *matCellDef="let element" class="mat-column-cell-one">
+        <mat-icon class="nofocus icon-pointer small-icon" matTooltip="Edit Booking" (click)="onEditClick(element)" id="edit_booking_button">edit</mat-icon>
+        <mat-icon class="nofocus icon-pointer small-icon" matTooltip="Delete Booking" (click)="onDeleteClick(element)" id="delete_booking_button">delete</mat-icon>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+    </table>
+
+</div>

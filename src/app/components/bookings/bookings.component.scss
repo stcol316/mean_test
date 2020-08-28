@@ -1,0 +1,166 @@
+.cm-content {
+  height: calc(100vh - 200px) !important;
+}
+
+table {
+  width: 98%;
+  min-width: 20%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.mat-expansion-panel:not([class*='mat-elevation-z']) {
+  box-shadow: none;
+}
+
+.mat-paginator-sticky {
+  bottom: 0px;
+  position: sticky;
+  z-index: 10;
+}
+
+.mat-header-row{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
+  }
+
+.mat-row {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.mat-row:last-child td {
+  border-bottom: none;
+}
+
+.mat-footer-row:first-child td {
+  border-top: none;
+}
+
+.mat-footer-cell .mat-paginator {
+  margin-left: -24px;
+  margin-right: -24px;
+}
+
+.table-container {
+  max-height: calc(100vh - 250px); // or height: calc(100vh - 155px); depending on your need  change
+  overflow: auto;
+  min-width:200px;
+  width: 100%;
+}
+
+table.mat-table {
+  width: 98%;
+  margin-left: 10px;
+}
+
+example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+mat-icon {
+  color: #aaaaaa;
+  margin-right:20px;
+}
+
+mat-icon:hover {
+  color: #1976d2;
+}
+
+.icon-pointer {
+  cursor: pointer;
+}
+
+.mat-icon-toolbar {
+  min-height: 20px !important;
+  height: 20px !important;
+  background:transparent;
+}
+
+.mat-column-header-one {
+  width:50px !important;
+  min-width:  80px !important;
+  max-width: 80px !important;
+  color: black;
+  font-weight: bold;
+  font-size:14px;
+}
+
+.mat-column-header-two {
+  width: 100px !important;
+  min-width: 100px !important;
+  max-width: 100px !important;
+  color: black;
+  font-weight: bold;
+  font-size:14px;
+}
+
+.mat-column-cell-one {
+  width:50px !important;
+  min-width:50px !important;
+  color: black;
+  font-weight: 500;
+  font-size:14px;
+}
+
+.mat-column-cell-two {
+  width:200px !important;
+  min-width:100px !important;
+}
+
+.mat-row:hover {
+  background-color: #fafafa;
+}
+
+.mat-row {
+  &.selected {
+      background: #eeeeee;
+  }
+}
+
+.highlight{
+  background: #eeeeee; /* green */
+}
+
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-option-pseudo-checkbox .mat-pseudo-checkbox .ng-star-inserted .mat-pseudo-checkbox-checked,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-accent .mat-pseudo-checkbox .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate,
+.mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
+background-color: #1976d2 !important;
+}
+
+.invis-button{
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.small-icon {
+  transform: scale(0.8);
+}
+
+:host ::ng-deep .custom-toast .ui-toast-message {
+  color: #ffffff;
+  background: green;
+}
+
+:host ::ng-deep .custom-toast .ui-toast-close-icon {
+  color: #ffffff;
+}
+
+.full-width {
+  width: 100%;
+  height: 100%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+

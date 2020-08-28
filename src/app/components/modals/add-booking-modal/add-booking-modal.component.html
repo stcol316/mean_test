@@ -1,0 +1,52 @@
+<mat-dialog-content [formGroup]="bookingForm" class="dialogContent">
+    <h4>Booking Form</h4>
+    
+    <mat-form-field style="width: 100%;">
+      <input matInput formControlName="firstName" [readonly]="isEdit" placeholder="First Name" [(ngModel)]="booking.firstName" required>
+      <mat-error *ngIf="booking.firstName== '' ">
+        Cannot be blank
+      </mat-error>
+    </mat-form-field>
+    <p></p>
+
+    <mat-form-field style="width: 100%;">
+        <input matInput formControlName="lastName" [readonly]="isEdit" placeholder="Surname" [(ngModel)]="booking.lastName" required>
+        <mat-error *ngIf="booking.lastName === '' ">
+          Cannot be blank
+        </mat-error>
+      </mat-form-field>
+      <p></p>
+
+      <mat-form-field style="width: 100%;">
+        <input matInput formControlName="bookingDate" placeholder="Date" [(ngModel)]="booking.bookingDate" required>
+        <mat-error *ngIf="booking.bookingDate === '' ">
+          Cannot be blank
+        </mat-error>
+      </mat-form-field>
+      <p></p>
+
+      <mat-form-field style="width: 100%;">
+        <input matInput formControlName="bookingTime" placeholder="Time" [(ngModel)]="booking.bookingTime" required>
+        <mat-error *ngIf="booking.bookingTime === '' ">
+          Cannot be blank
+        </mat-error>
+      </mat-form-field>
+      <p></p>
+
+      <mat-form-field style="width: 100%;">
+        <input matInput formControlName="partySize" placeholder="Party Size" [(ngModel)]="booking.firstName" required>
+        <mat-error *ngIf="booking.partySize === 0 ">
+          Cannot be blank
+        </mat-error>
+      </mat-form-field>
+      <p></p>
+  
+  
+  </mat-dialog-content>
+  
+  <mat-dialog-actions>
+      <button mat-button class="mat-raised-button"(click)="onCloseClick()" >Close</button>
+      <button mat-button class="mat-raised-button mat-primary" [disabled]="bookingForm.invalid" (click)="onSaveClick()">Save</button>
+  </mat-dialog-actions>
+  <br>
+  
