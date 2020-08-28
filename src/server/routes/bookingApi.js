@@ -1,9 +1,20 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const bookingController = require('../controllers/bookingController');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.json({users: [{name: 'Timmy'}]});
+router.get('/', function(req, res) {
+  res.json({
+    status: 'API Working',
+    message: 'Drop the base',
+  });
 });
+
+router.route('/bookings')
+    .get(bookingController.index)
+    .post(bookingController.new);
+
+router.route('/bookings/:booking_id')
+    .put(bookingController.update)
+    .delete(bookingController.delete);
 
 module.exports = router;
