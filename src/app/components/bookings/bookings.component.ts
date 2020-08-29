@@ -118,6 +118,7 @@ export class BookingsComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AddBookingModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result =>{
+      
       if(result != null){
         this.isLoading = true;
         this.bookingSvc.updateBooking(result.booking).subscribe(
