@@ -50,6 +50,7 @@ export class BookingsComponent implements OnInit {
 
   getBookings(){
     this.isLoading = true;
+    this.bookingsList = [];
     this.bookingSvc.getBookings().subscribe(
       result => {
         if(result != null && result.data != null){
@@ -124,12 +125,12 @@ export class BookingsComponent implements OnInit {
     });
   }
 
-  onDeleteClick(element){
+  onDeleteClick(element:Booking){
     this.isLoading = true;
-    this.bookingSvc.deleteBooking(element).subscribe(
+    this.bookingSvc.deleteBooking(element._id).subscribe(
       result => {
         if(result != null){
-
+          this.getBookings();
         }
       }, error =>{
         console.log('Error deleting booking')

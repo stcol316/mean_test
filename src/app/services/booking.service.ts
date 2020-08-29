@@ -23,7 +23,7 @@ export class BookingService {
   }
 
   deleteBooking(bookingId){
-    const restApi = `/api/booking/bookings/${bookingId}`;
+    const restApi = `http://localhost:8080/api/booking/bookings/${bookingId}`;
 
     return this.http.delete<any>(restApi, {params: bookingId});
   }
