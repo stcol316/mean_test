@@ -34,6 +34,14 @@
       <p></p>
 
       <mat-form-field style="width: 100%;">
+        <input matInput formControlName="phoneNumber" placeholder="Phone Number" [(ngModel)]="booking.phoneNumber" required>
+        <mat-error *ngIf="booking.phoneNumber === '' ">
+          Cannot be blank
+        </mat-error>
+      </mat-form-field>
+      <p></p>
+
+      <mat-form-field style="width: 100%;">
         <input matInput formControlName="partySize" placeholder="Party Size" [(ngModel)]="booking.firstName" required>
         <mat-error *ngIf="booking.partySize === 0 ">
           Cannot be blank

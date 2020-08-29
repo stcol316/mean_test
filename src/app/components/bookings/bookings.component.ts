@@ -17,9 +17,9 @@ export class BookingsComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
-  book1:Booking = new Booking('steve', 'collins', '3/1/1/1', '12:03', '1234', 3); 
-  book2:Booking = new Booking('frankie', 'stanley', '2/1/1/2', '12:00', '5234', 2); 
-  book3:Booking = new Booking('stephanie', 'crup', '1/1/1/2', '11:00', '134', 3); 
+  // book1:Booking = new Booking('steve', 'collins', '3/1/1/1', '12:03', '1234', 3); 
+  // book2:Booking = new Booking('frankie', 'stanley', '2/1/1/2', '12:00', '5234', 2); 
+  // book3:Booking = new Booking('stephanie', 'crup', '1/1/1/2', '11:00', '134', 3); 
 
   isLoading = false;
   bookingsList: Booking[] = [];//[this.book1, this.book2, this.book3];
@@ -54,8 +54,6 @@ export class BookingsComponent implements OnInit {
     this.bookingSvc.getBookings().subscribe(
       result => {
         if(result != null && result.data != null){
-          console.log('Got bookings');
-          console.log(result.data);
           result.data.forEach(bookingString => {
             const booking = new Booking(
               bookingString._id,
@@ -71,7 +69,7 @@ export class BookingsComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.bookingsList);
         }
       }, error =>{
-        console.log('Error getting bookings');
+        console.log('Error getting bookings: ', error);
       }
     ).add(() => {
       this.isLoading = false;
@@ -99,11 +97,11 @@ export class BookingsComponent implements OnInit {
       if(result != null){
         this.bookingSvc.addBooking(result).subscribe(
           result => {
-            if(result != null && result.bookings != null){
-              this.bookingsList = result.bookings;
+            if(result != null){
+              this.getBookings();
             }
           }, error =>{
-            console.log('Error adding booking')
+            console.log('Error adding booking: ', error)
           }
         );
       }
@@ -111,17 +109,29 @@ export class BookingsComponent implements OnInit {
   }
 
   onEditClick(element){
-    this.isLoading = true;
-    this.bookingSvc.updateBooking(element).subscribe(
-      result => {
-        if(result != null){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.minWidth = '700px';
+    dialogConfig.maxWidth = '70vw';
+    dialogConfig.data = {booking: element};
 
-        }
-      }, error =>{
-        console.log('Error updating booking')
+    const dialogRef = this.dialog.open(AddBookingModalComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result != null){
+        this.isLoading = true;
+        this.bookingSvc.updateBooking(element).subscribe(
+          result => {
+            if(result != null){
+              this.getBookings();
+            }
+          }, error =>{
+            console.log('Error updating booking:', error)
+          }
+        ).add(() => {
+          this.isLoading = false;
+        });
       }
-    ).add(() => {
-      this.isLoading = false;
     });
   }
 
@@ -133,7 +143,7 @@ export class BookingsComponent implements OnInit {
           this.getBookings();
         }
       }, error =>{
-        console.log('Error deleting booking')
+        console.log('Error deleting booking: ', error)
       }
     ).add(() => {
       this.isLoading = false;

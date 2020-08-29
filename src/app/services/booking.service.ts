@@ -29,7 +29,7 @@ export class BookingService {
   }
 
   updateBooking(bookingData:Booking){
-    const restApi = `/api/booking/bookings/${bookingData.id}`;
+    const restApi = `http://localhost:8080/api/booking/bookings/${bookingData._id}`;
 
     return this.http.put<any>(restApi, bookingData);
   }

@@ -22,7 +22,7 @@ exports.index = function (req, res) {
 // Post
 exports.new = function (req, res) {
     console.log('Adding booking');
-
+    console.log(req);
     let booking = new Booking();
     //booking.firstName = req.body.name ? req.body.name : booking.name;
     booking.firstName = req.body.firstName;// ? req.body.firstName : booking.firstName;
