@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Booking } from '../../../_models/booking';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { throws } from 'assert';
 
 @Component({
@@ -34,8 +34,8 @@ export class AddBookingModalComponent implements OnInit {
       lastName:'',
       bookingDate:'',
       bookingTime:'',
-      phoneNumber:'',
-      partySize:''
+      phoneNumber:'',//['', [Validators.pattern(/^[0-9]\d*$/), Validators.minLength(6), Validators.maxLength(20)]],
+      partySize:''//['', [Validators.pattern(/^[0-9]\d*$/)]]
     })
   }
 

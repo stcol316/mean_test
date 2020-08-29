@@ -95,7 +95,7 @@ export class BookingsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddBookingModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result =>{
       if(result != null){
-        this.bookingSvc.addBooking(result).subscribe(
+        this.bookingSvc.addBooking(result.booking).subscribe(
           result => {
             if(result != null){
               this.getBookings();
@@ -120,7 +120,7 @@ export class BookingsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result =>{
       if(result != null){
         this.isLoading = true;
-        this.bookingSvc.updateBooking(element).subscribe(
+        this.bookingSvc.updateBooking(result.booking).subscribe(
           result => {
             if(result != null){
               this.getBookings();

@@ -3,7 +3,7 @@
     
     <mat-form-field style="width: 100%;">
       <input matInput formControlName="firstName" [readonly]="isEdit" placeholder="First Name" [(ngModel)]="booking.firstName" required>
-      <mat-error *ngIf="booking.firstName== '' ">
+      <mat-error>
         Cannot be blank
       </mat-error>
     </mat-form-field>
@@ -11,7 +11,7 @@
 
     <mat-form-field style="width: 100%;">
         <input matInput formControlName="lastName" [readonly]="isEdit" placeholder="Surname" [(ngModel)]="booking.lastName" required>
-        <mat-error *ngIf="booking.lastName === '' ">
+        <mat-error>
           Cannot be blank
         </mat-error>
       </mat-form-field>
@@ -19,7 +19,7 @@
 
       <mat-form-field style="width: 100%;">
         <input matInput formControlName="bookingDate" placeholder="Date" [(ngModel)]="booking.bookingDate" required>
-        <mat-error *ngIf="booking.bookingDate === '' ">
+        <mat-error>
           Cannot be blank
         </mat-error>
       </mat-form-field>
@@ -27,7 +27,7 @@
 
       <mat-form-field style="width: 100%;">
         <input matInput formControlName="bookingTime" placeholder="Time" [(ngModel)]="booking.bookingTime" required>
-        <mat-error *ngIf="booking.bookingTime === '' ">
+        <mat-error>
           Cannot be blank
         </mat-error>
       </mat-form-field>
@@ -35,16 +35,16 @@
 
       <mat-form-field style="width: 100%;">
         <input matInput formControlName="phoneNumber" placeholder="Phone Number" [(ngModel)]="booking.phoneNumber" required>
-        <mat-error *ngIf="booking.phoneNumber === '' ">
-          Cannot be blank
+        <mat-error>
+          Required: Must be a valid number
         </mat-error>
       </mat-form-field>
       <p></p>
 
       <mat-form-field style="width: 100%;">
-        <input matInput formControlName="partySize" placeholder="Party Size" [(ngModel)]="booking.firstName" required>
-        <mat-error *ngIf="booking.partySize === 0 ">
-          Cannot be blank
+        <input matInput formControlName="partySize" placeholder="Party Size" [(ngModel)]="booking.partySize" required>
+        <mat-error *ngIf="booking.partySize === '0' ">
+          Required: Must be a number greater than 0
         </mat-error>
       </mat-form-field>
       <p></p>
