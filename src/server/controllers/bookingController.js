@@ -2,6 +2,7 @@ const Booking = require('../models/bookingModel');
 
 //Get
 exports.index = function (req, res) {
+    console.log('Getting bookings');
     Booking.get(function (err, bookings) {
         if (err) {
             res.json({
@@ -19,6 +20,8 @@ exports.index = function (req, res) {
 
 // Post
 exports.new = function (req, res) {
+    console.log('Adding booking');
+
     let booking = new Booking();
     //booking.firstName = req.body.name ? req.body.name : booking.name;
     booking.firstName = req.body.firstName;// ? req.body.firstName : booking.firstName;
@@ -38,7 +41,9 @@ exports.new = function (req, res) {
 
 // Put
 exports.update = function (req, res) {
-Booking.findById(req.params.booking_id, function (err, booking) {
+    console.log('Updating booking');
+
+    Booking.findById(req.params.booking_id, function (err, booking) {
         if (err)
             res.send(err);
         booking.firstName = req.body.firstName;// ? req.body.firstName : booking.firstName;
@@ -60,6 +65,8 @@ Booking.findById(req.params.booking_id, function (err, booking) {
 };
 
 exports.delete = function (req, res) {
+    console.log('Deleting booking');
+
     Booking.remove({
         _id: req.params.booking_id
     }, function (err, booking) {
