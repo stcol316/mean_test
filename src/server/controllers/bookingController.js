@@ -5,6 +5,7 @@ exports.index = function (req, res) {
     console.log('Getting bookings');
     Booking.get(function (err, bookings) {
         if (err) {
+            console.log(err);
             res.json({
                 status: "error",
                 message: err,

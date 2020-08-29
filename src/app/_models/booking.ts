@@ -1,5 +1,5 @@
 export class Booking {
-    id:string;
+    _id:string;
     firstName:string;
     lastName:string;
     bookingDate:string;
@@ -8,6 +8,7 @@ export class Booking {
     partySize:number;
 
     constructor(
+        _id?: '',
         firstName:string = '',
         lastName:string = '',
         bookingDate:string = '',
@@ -15,7 +16,7 @@ export class Booking {
         phoneNumber:string = '',
         partySize:number = 0
         ){
-            this.id = undefined;
+            this._id = _id;
             this.firstName = firstName;
             this.lastName = lastName;
             this.bookingDate = bookingDate;

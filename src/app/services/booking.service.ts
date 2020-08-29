@@ -10,7 +10,7 @@ export class BookingService {
   constructor(private http: HttpClient) { }
 
   getBookings(){
-    const restApi='/api/booking/bookings';
+    const restApi = 'http://localhost:8080/api/booking/bookings';
 
     return this.http.get<any>(restApi);
   }

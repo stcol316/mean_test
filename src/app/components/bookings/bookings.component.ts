@@ -22,7 +22,7 @@ export class BookingsComponent implements OnInit {
   book3:Booking = new Booking('stephanie', 'crup', '1/1/1/2', '11:00', '134', 3); 
 
   isLoading = false;
-  bookingsList: Booking[] = [this.book1, this.book2, this.book3];
+  bookingsList: Booking[] = [];//[this.book1, this.book2, this.book3];
   sortedData: Booking[];
   dataSource = new MatTableDataSource(this.bookingsList);
   displayedColumns = [
@@ -40,7 +40,7 @@ export class BookingsComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    //this.getBookings();
+    this.getBookings();
   }
 
   ngAfterViewInit() {
@@ -52,11 +52,25 @@ export class BookingsComponent implements OnInit {
     this.isLoading = true;
     this.bookingSvc.getBookings().subscribe(
       result => {
-        if(result != null && result.bookings != null){
-          this.bookingsList = result.bookings;
+        if(result != null && result.data != null){
+          console.log('Got bookings');
+          console.log(result.data);
+          result.data.forEach(bookingString => {
+            const booking = new Booking(
+              bookingString._id,
+              bookingString.firstName,
+              bookingString.lastName,
+              bookingString.bookingDate,
+              bookingString.bookingTime,
+              bookingString.phoneNumber,
+              bookingString.partySize);
+
+              this.bookingsList.push(booking);
+          });
+          this.dataSource = new MatTableDataSource(this.bookingsList);
         }
       }, error =>{
-        console.log('Error getting bookings')
+        console.log('Error getting bookings');
       }
     ).add(() => {
       this.isLoading = false;
