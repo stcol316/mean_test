@@ -17,8 +17,18 @@
       </mat-form-field>
       <p></p>
 
+      <!-- <mat-form-field style="width: 100%;">
+        <input matInput type="datetime-local" placeholder="start date" formControlName="dateTime" placeholder="Date and Time" [(ngModel)]="datetime" required>
+        <mat-error>
+          Please select and date and time
+        </mat-error>
+      </mat-form-field>
+      <p></p> -->
+
       <mat-form-field style="width: 100%;">
-        <input matInput formControlName="bookingDate" placeholder="Date" [(ngModel)]="booking.bookingDate" required>
+        <input matInput readonly [matDatepicker]="bookingDatePicker" formControlName="bookingDate" placeholder="Date" [(ngModel)]="booking.bookingDate" required>
+        <mat-datepicker-toggle matSuffix [for]="bookingDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #bookingDatePicker></mat-datepicker>
         <mat-error>
           Cannot be blank
         </mat-error>
@@ -42,7 +52,7 @@
       <p></p>
 
       <mat-form-field style="width: 100%;">
-        <input matInput formControlName="partySize" placeholder="Party Size" [(ngModel)]="booking.partySize" required>
+        <input matInput  type="number" formControlName="partySize" placeholder="Party Size" [(ngModel)]="booking.partySize" required>
         <mat-error *ngIf="booking.partySize === '0' ">
           Required: Must be a number greater than 0
         </mat-error>

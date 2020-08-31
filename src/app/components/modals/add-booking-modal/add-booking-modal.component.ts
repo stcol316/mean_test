@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Booking } from '../../../_models/booking';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { throws } from 'assert';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-booking-modal',
@@ -15,6 +15,7 @@ export class AddBookingModalComponent implements OnInit {
   isEdit = false;
   bookingForm: FormGroup;
   formInvalid = true;
+  datetime;
 
   constructor(
     public dialogRef: MatDialogRef<AddBookingModalComponent>,
@@ -34,8 +35,8 @@ export class AddBookingModalComponent implements OnInit {
       lastName:'',
       bookingDate:'',
       bookingTime:'',
-      phoneNumber:'',//['', [Validators.pattern(/^[0-9]\d*$/), Validators.minLength(6), Validators.maxLength(20)]],
-      partySize:''//['', [Validators.pattern(/^[0-9]\d*$/)]]
+      phoneNumber:['', [Validators.pattern(/^[0-9]\d*$/), Validators.minLength(6), Validators.maxLength(20)]],
+      partySize:['', [Validators.pattern(/^[0-9]\d*$/)]]
     })
   }
 

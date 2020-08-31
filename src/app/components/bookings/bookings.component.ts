@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Booking } from '../../_models/booking';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
@@ -6,6 +6,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { BookingService } from '../../services/booking.service';
 import { AddBookingModalComponent } from '../modals/add-booking-modal/add-booking-modal.component';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-bookings',
@@ -15,16 +16,13 @@ import { AddBookingModalComponent } from '../modals/add-booking-modal/add-bookin
 
 export class BookingsComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  
-  // book1:Booking = new Booking('steve', 'collins', '3/1/1/1', '12:03', '1234', 3); 
-  // book2:Booking = new Booking('frankie', 'stanley', '2/1/1/2', '12:00', '5234', 2); 
-  // book3:Booking = new Booking('stephanie', 'crup', '1/1/1/2', '11:00', '134', 3); 
+  @ViewChild('paginator', { static: true }) paginator: MatPaginator;  
 
   isLoading = false;
-  bookingsList: Booking[] = [];//[this.book1, this.book2, this.book3];
+  bookingsList: Booking[] = [];
   sortedData: Booking[];
-  dataSource = new MatTableDataSource(this.bookingsList);
+  dataSource = new MatTableDataSource<Booking>();
+  controlForm: FormGroup;
   displayedColumns = [
     'firstName',
     'lastName',
@@ -37,15 +35,27 @@ export class BookingsComponent implements OnInit {
 
   constructor(
     private bookingSvc: BookingService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.getBookings();
+
+    this.controlForm = this.fb.group({
+      fromDate:'',
+      toDate:''
+     });
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 
   getBookings(){
@@ -66,7 +76,7 @@ export class BookingsComponent implements OnInit {
 
               this.bookingsList.push(booking);
           });
-          this.dataSource = new MatTableDataSource(this.bookingsList);
+          this.dataSource.data = this.bookingsList;
         }
       }, error =>{
         console.log('Error getting bookings: ', error);
@@ -118,7 +128,7 @@ export class BookingsComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AddBookingModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result =>{
-      
+
       if(result != null){
         this.isLoading = true;
         this.bookingSvc.updateBooking(result.booking).subscribe(

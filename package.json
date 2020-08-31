@@ -24,11 +24,15 @@
     "@fortawesome/angular-fontawesome": "^0.7.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "cdk-table-exporter": "^9.0.2",
     "express": "^4.17.1",
+    "mat-table-exporter": "^9.0.2",
+    "moment": "^2.27.0",
     "rxjs": "~6.5.5",
     "sqlite3": "^5.0.0",
     "tslib": "^2.0.0",
     "typeorm": "^0.2.25",
+    "xlsx": "^0.16.6",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {

@@ -7,6 +7,7 @@ import { BookingsComponent } from './components/bookings/bookings.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from './_shared/material/material.module';
 import { AddBookingModalComponent } from './components/modals/add-booking-modal/add-booking-modal.component';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AddBookingModalComponent } from './components/modals/add-booking-modal/
     FormsModule,
     MaterialModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableExporterModule
   ],
   exports: [
     FormsModule,

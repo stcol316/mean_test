@@ -1,17 +1,41 @@
 <div tabContent class="table-container">
 
-    <span style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+    <span [formGroup]="controlForm" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
         <button mat-button (click)="onNewClick()">
             <mat-icon matTooltip="Add new booking">more_time</mat-icon>
         </button>
 
-        <mat-paginator [length]="100"
+        <mat-form-field style="margin-left: 10px;">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+
+        <mat-form-field style="margin-left: 10px;">
+            <input matInput 
+                [matDatepicker]="fromDate" 
+                placeholder="From Date" 
+                formControlName="fromDate">
+            <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+            <mat-datepicker #fromDate></mat-datepicker>
+        </mat-form-field>
+    
+        <mat-form-field style="margin-left: 10px;">
+            <input matInput 
+                [matDatepicker]="toDate" 
+                placeholder="To Date" 
+                formControlName="toDate">
+            <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+            <mat-datepicker #toDate></mat-datepicker>
+        </mat-form-field>
+
+        <mat-paginator #paginator [length]="100"
             [pageSize]="25"
-            [pageSizeOptions]="[1, 5, 10, 25, 100]">
+            [pageSizeOptions]="[1, 5, 10, 25, 100]"
+            style="margin-left: 10px;">
         </mat-paginator>
+
     </span>
 
-    <table mat-table #table [dataSource]="dataSource" matSort >
+    <table mat-table matTableExporter matSort #exporter="matTableExporter" #table [dataSource]="dataSource" >
 
     <ng-container matColumnDef="firstName">
         <th mat-header-cell mat-sort-header *matHeaderCellDef class="mat-column-header-two">Name</th>
@@ -25,7 +49,7 @@
 
     <ng-container matColumnDef="bookingDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-header-two">Date</th>
-        <td mat-cell *matCellDef="let element" id="booking_date_field" class="mat-column-cell-two">{{element.bookingDate}}</td>
+        <td mat-cell *matCellDef="let element" id="booking_date_field" class="mat-column-cell-two">{{element.bookingDate | date:"dd/MM/yy"}}</td>
     </ng-container>
 
     <ng-container matColumnDef="bookingTime">
@@ -34,12 +58,12 @@
     </ng-container>
 
     <ng-container matColumnDef="phoneNumber">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-header-two">Number</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-header-two">Phone No.</th>
         <td mat-cell *matCellDef="let element" id="phone_number_field" class="mat-column-cell-two">{{element.phoneNumber}}</td>
     </ng-container>
 
     <ng-container matColumnDef="partySize">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-header-two">Size</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-header-two">Party</th>
         <td mat-cell *matCellDef="let element" id="party_size_field" class="mat-column-cell-two">{{element.partySize}}</td>
     </ng-container>
 
@@ -54,5 +78,9 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
     </table>
+
+    <div>
+        <button mat-raised-button color="primary" (click)="exporter.exportTable('csv')">Export Bookings</button>
+    </div>
 
 </div>
